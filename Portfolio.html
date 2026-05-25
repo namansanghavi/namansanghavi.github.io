@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Naman Sanghavi — AI/ML Engineer</title>
+<meta name="description" content="AI/ML Engineer · production AI systems, RAG, propensity modeling, computer vision. Currently shipping at Waaree Energies." />
+
+<!-- Favicon (inline SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='serif'%3EN%3C/text%3E%3C/svg%3E" />
+
+<!-- Fonts: Fraunces (display serif), JetBrains Mono (tech accents), Geist (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,30..100,0..1&family=JetBrains+Mono:wght@300..600&family=Geist:wght@300..600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #14131a;
+    --paper: #f5f1e8;
+    --paper-2: #ede7d6;
+    --solar: #c8932b;
+    --solar-glow: #e8b547;
+    --rule: #2a2730;
+    --muted: #6b6770;
+    --link: #1e2761;
+
+    --serif: "Fraunces", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 0.08, 0 0 0 0 0.07, 0 0 0 0 0.10, 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: var(--solar); color: var(--ink); }
+
+  /* ───────────── NAV ───────────── */
+  nav.top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.25rem 2rem;
+    background: rgba(245, 241, 232, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.top.scrolled { border-bottom-color: rgba(20, 19, 26, 0.1); }
+
+  nav.top .brand {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.1rem;
+    font-variation-settings: "opsz" 14, "SOFT" 50;
+    letter-spacing: -0.01em;
+  }
+  nav.top .brand .dot { color: var(--solar); }
+
+  nav.top ul {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+    align-items: baseline;
+  }
+  nav.top ul a {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+  nav.top ul a:hover { color: var(--solar); }
+
+  /* ───────────── HERO ───────────── */
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: var(--solar);
+  }
+  .hero .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--solar);
+    box-shadow: 0 0 0 0 var(--solar-glow);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(232, 181, 71, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(232, 181, 71, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(232, 181, 71, 0); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--solar);
+  }
+
+  .hero .lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    max-width: 38rem;
+    font-variation-settings: "opsz" 36, "SOFT" 50;
+    color: var(--ink);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  .hero .lede strong {
+    font-weight: 500;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+
+  .hero .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 3rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+  .hero .meta div .label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .hero .meta div .value {
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .hero .meta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--solar);
+    padding-bottom: 1px;
+    transition: color 0.2s ease;
+  }
+  .hero .meta a:hover { color: var(--solar); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ───────────── SECTIONS ───────────── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--solar);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
+    font-variation-settings: "opsz" 72, "SOFT" 30;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  }
+
+  /* ───────────── PROJECTS ───────────── */
+  .project {
+    margin-bottom: 8rem;
+    scroll-margin-top: 6rem;
+  }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .project-head .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--solar);
+    font-weight: 500;
+  }
+  .project-head h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+  }
+  .project-head h3 em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  .project-head .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--muted);
+    font-variation-settings: "opsz" 24, "SOFT" 50;
+    max-width: 50rem;
+  }
+
+  /* Video container with 16:9 ratio */
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+    border: 1px solid rgba(20, 19, 26, 0.15);
+    margin-bottom: 3rem;
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-wrap .caption {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--paper);
+    background: rgba(20, 19, 26, 0.7);
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* Problem / Solution block */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem 3rem;
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    background: var(--paper-2);
+    border-left: 3px solid var(--solar);
+  }
+  .ps-grid .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    padding-top: 0.4rem;
+  }
+  .ps-grid .text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    font-weight: 400;
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+  }
+  .ps-grid .text strong {
+    font-weight: 600;
+    font-variation-settings: "opsz" 18, "SOFT" 30;
+  }
+
+  /* Metrics callout */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 3rem;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .metrics .metric {
+    padding: 2rem 1.5rem;
+    text-align: left;
+    border-right: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .metrics .metric:last-child { border-right: none; }
+  .metrics .metric .big {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 400;
+    line-height: 1;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .metrics .metric .big em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  .metrics .metric .label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* AS-IS / TO-BE table */
+  .compare {
+    margin-bottom: 3rem;
+  }
+  .compare h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .compare .rows {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem 2rem;
+    align-items: baseline;
+  }
+  .compare .header-row {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .compare .as-is {
+    font-family: var(--serif);
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+    padding: 0.5rem 0;
+  }
+  .compare .arrow {
+    color: var(--solar);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .compare .to-be {
+    font-family: var(--serif);
+    color: var(--ink);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    font-weight: 500;
+    font-variation-settings: "opsz" 18, "SOFT" 30;
+    padding: 0.5rem 0;
+  }
+
+  /* How it works */
+  .how {
+    margin-bottom: 3rem;
+  }
+  .how h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .how .step {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.1);
+  }
+  .how .step:last-child { border-bottom: none; }
+  .how .step .stage {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--solar);
+    font-weight: 500;
+    padding-top: 0.15rem;
+  }
+  .how .step .body {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .how .step .body code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* Stack */
+  .stack {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .stack h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--solar-glow);
+    margin-bottom: 1rem;
+  }
+  .stack .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+  .stack .chips span {
+    border: 1px solid rgba(245, 241, 232, 0.25);
+    padding: 0.35rem 0.7rem;
+    border-radius: 1px;
+    color: var(--paper);
+  }
+
+  /* Engineering decisions */
+  .decisions {
+    margin-bottom: 0;
+  }
+  .decisions h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .decisions .d {
+    margin-bottom: 1.75rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--solar);
+  }
+  .decisions .d:last-child { margin-bottom: 0; }
+  .decisions .d .title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+  }
+  .decisions .d .desc {
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .decisions .d .desc code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--ink);
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ───────────── OTHER PROJECTS ───────────── */
+  .other-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .other-card {
+    padding: 2rem;
+    background: var(--paper-2);
+    border: 1px solid rgba(20, 19, 26, 0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .other-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--solar);
+  }
+  .other-card .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--solar);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .other-card h4 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+  .other-card p {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .other-card .stack-mini {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink);
+    border-top: 1px solid rgba(20, 19, 26, 0.1);
+    padding-top: 1rem;
+  }
+
+  /* ───────────── FOOTER ───────────── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  footer .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    position: relative;
+    z-index: 1;
+  }
+  footer h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    margin-bottom: 2rem;
+  }
+  footer h3 em {
+    font-style: italic;
+    color: var(--solar-glow);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  footer .contacts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-content: end;
+  }
+  footer .contact-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.15);
+  }
+  footer .contact-line .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--solar-glow);
+  }
+  footer .contact-line a {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--paper);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer .contact-line a:hover { color: var(--solar-glow); }
+
+  footer .copyright {
+    max-width: 1280px;
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 241, 232, 0.1);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .copyright span:first-child { text-transform: uppercase; }
+
+  /* Decorative sun in footer */
+  footer::after {
+    content: "";
+    position: absolute;
+    right: -150px; top: -150px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--solar) 0%, transparent 60%);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* ───────────── HAND OF CARDS ───────────── */
+  .hand-wrap {
+    margin-top: -1rem;
+  }
+
+  .hand {
+    position: relative;
+    height: 22rem;
+    /* NOTE: do NOT set perspective/transform/filter here — they create a
+       containing block for position:fixed descendants and break the
+       click-to-zoom (the card would zoom relative to .hand, not viewport). */
+    padding-top: 2.5rem;
+  }
+  .hand .card {
+    position: absolute;
+    width: 13.5rem;
+    height: 17.5rem;
+    bottom: 0.5rem;
+    left: 50%;
+    margin-left: -6.75rem;
+    /* fan: index --i out of --n */
+    --i: 0; --n: 7;
+    --mid: calc((var(--n) - 1) / 2.0);
+    --o: calc(var(--i) - var(--mid));
+    --rot: calc(var(--o) * 7deg);
+    --tx: calc(var(--o) * 5.5rem);
+    --ty: calc(var(--o) * var(--o) * 0.18rem); /* slight arc lift in middle */
+    transform: translateX(var(--tx)) translateY(var(--ty)) rotate(var(--rot));
+    transform-origin: 50% 110%;
+    cursor: pointer;
+    padding: 1.5rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    background: var(--paper);
+    border: 1px solid rgba(20, 19, 26, 0.18);
+    border-radius: 14px;
+    box-shadow:
+      0 12px 28px -14px rgba(20, 19, 26, 0.4),
+      0 3px 8px -3px rgba(20, 19, 26, 0.2);
+    transition:
+      transform 0.45s cubic-bezier(0.3, 0, 0.2, 1),
+      box-shadow 0.45s ease,
+      border-color 0.3s ease;
+    overflow: hidden;
+    z-index: calc(10 + var(--i));
+    /* paper texture hint */
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(20,19,26,0.015) 0%, transparent 50%),
+      radial-gradient(circle at 80% 90%, rgba(20,19,26,0.02) 0%, transparent 50%);
+  }
+  .hand .card:hover {
+    transform: translateX(var(--tx)) translateY(-2.5rem) rotate(0deg) scale(1.06);
+    z-index: 50;
+    border-color: var(--solar);
+    box-shadow:
+      0 28px 52px -16px rgba(20, 19, 26, 0.55),
+      0 10px 20px -8px rgba(20, 19, 26, 0.35);
+  }
+  /* tilt hint on hover for neighbours via :has()? Skip for compat — keep simple */
+
+  /* Tile content (hand mode) */
+  .hand .card .card-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.12);
+  }
+  .hand .card .card-head .step-num { font-size: 0.65rem; letter-spacing: 0.15em; }
+  .hand .card .card-head .step-title {
+    font-size: 1.45rem;
+    line-height: 1.05;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+  .hand .card .card-head .step-title em {
+    font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 1;
+  }
+  .hand .card .card-body {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--muted);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    pointer-events: none;
+  }
+  /* Hide complex children in tile mode; show a single preview line via ::before */
+  .hand .card .card-body > * { display: none; }
+  .hand .card .card-body::before {
+    content: attr(data-preview);
+    display: block;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink);
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+  }
+
+  /* Dark stack tile */
+  .hand .card.card--stack {
+    background: var(--ink);
+    border-color: rgba(245, 241, 232, 0.15);
+  }
+  .hand .card.card--stack .card-head { border-bottom-color: rgba(245, 241, 232, 0.18); }
+  .hand .card.card--stack .card-head .step-num { color: var(--solar-glow); }
+  .hand .card.card--stack .card-head .step-title { color: var(--paper); }
+  .hand .card.card--stack .card-body::before { color: var(--paper); }
+
+  /* corner number badge — peek of card in hand */
+  .hand .card .corner-badge {
+    position: absolute;
+    bottom: 0.85rem;
+    right: 1rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+  .hand .card.card--stack .corner-badge { color: rgba(245, 241, 232, 0.5); }
+
+  /* Hint pulse on the middle card */
+  .hand .card.is-hint::after {
+    content: "Click to expand";
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--solar);
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+  .hand .card.card--stack.is-hint::after { color: var(--solar-glow); }
+
+  /* ────── ZOOMED CARD ────── */
+  .hand-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 19, 26, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 500;
+  }
+  .hand-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hand .card.is-zoomed {
+    position: fixed !important;
+    margin: 0 !important;
+    z-index: 1000;
+    cursor: default;
+    padding: 2.5rem 2.75rem 2.75rem;
+    border-color: rgba(20, 19, 26, 0.25);
+    border-radius: 18px;
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.55),
+      0 16px 32px -8px rgba(0, 0, 0, 0.35);
+    transition:
+      top 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+      left 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+      width 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+      height 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+      transform 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+      padding 0.55s ease,
+      box-shadow 0.55s ease,
+      border-radius 0.55s ease;
+  }
+  .hand .card.is-zoomed:hover {
+    transform: none;
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.55),
+      0 16px 32px -8px rgba(0, 0, 0, 0.35);
+  }
+  .hand .card.is-zoomed .card-head {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+    padding-right: 3rem; /* avoid close btn */
+  }
+  .hand .card.is-zoomed .card-head .step-num { font-size: 0.72rem; }
+  .hand .card.is-zoomed .card-head .step-title {
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    font-variation-settings: "opsz" 48, "SOFT" 30;
+  }
+  .hand .card.is-zoomed .card-head .step-title em {
+    font-variation-settings: "opsz" 48, "SOFT" 100, "WONK" 1;
+  }
+  .hand .card.is-zoomed .card-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink);
+    overflow-y: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    pointer-events: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(20, 19, 26, 0.25) transparent;
+  }
+  .hand .card.card--stack.is-zoomed .card-body { color: var(--paper); }
+  .hand .card.is-zoomed .card-body::-webkit-scrollbar { width: 6px; }
+  .hand .card.is-zoomed .card-body::-webkit-scrollbar-thumb { background: rgba(20, 19, 26, 0.2); border-radius: 3px; }
+  .hand .card.is-zoomed .card-body::before { display: none; }
+  .hand .card.is-zoomed .card-body > * { display: revert; }
+  .hand .card.is-zoomed .corner-badge { display: none; }
+  .hand .card.is-zoomed.is-hint::after { display: none; }
+
+  .card-close {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    appearance: none;
+    background: transparent;
+    border: 1px solid rgba(20, 19, 26, 0.2);
+    color: var(--ink);
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .card-close:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .card.card--stack .card-close {
+    color: var(--paper);
+    border-color: rgba(245, 241, 232, 0.3);
+  }
+  .card.card--stack .card-close:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+  .hand .card.is-zoomed .card-close { display: flex; }
+
+  /* ────── Content enters with stagger when card zooms in ────── */
+  @keyframes zoomFadeIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hand .card.is-zoomed .card-head {
+    animation: zoomFadeIn 0.55s 0.18s cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+  }
+  .hand .card.is-zoomed .card-body > * {
+    animation: zoomFadeIn 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+  }
+  /* stagger children */
+  .hand .card.is-zoomed .card-body > *:nth-child(1) { animation-delay: 0.28s; }
+  .hand .card.is-zoomed .card-body > *:nth-child(2) { animation-delay: 0.34s; }
+  .hand .card.is-zoomed .card-body > *:nth-child(3) { animation-delay: 0.40s; }
+  .hand .card.is-zoomed .card-body > *:nth-child(4) { animation-delay: 0.46s; }
+  .hand .card.is-zoomed .card-body > *:nth-child(5) { animation-delay: 0.52s; }
+  .hand .card.is-zoomed .card-body > *:nth-child(6) { animation-delay: 0.58s; }
+  /* For deep-nested content (steps, decisions, compare rows) stagger inner rows too */
+  .hand .card.is-zoomed .steps .row,
+  .hand .card.is-zoomed .d,
+  .hand .card.is-zoomed .m-grid .m,
+  .hand .card.is-zoomed .chips span,
+  .hand .card.is-zoomed .rows > * {
+    animation: zoomFadeIn 0.5s cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+  }
+  .hand .card.is-zoomed .steps .row:nth-child(1),
+  .hand .card.is-zoomed .d:nth-child(1),
+  .hand .card.is-zoomed .m-grid .m:nth-child(1) { animation-delay: 0.32s; }
+  .hand .card.is-zoomed .steps .row:nth-child(2),
+  .hand .card.is-zoomed .d:nth-child(2),
+  .hand .card.is-zoomed .m-grid .m:nth-child(2) { animation-delay: 0.40s; }
+  .hand .card.is-zoomed .steps .row:nth-child(3),
+  .hand .card.is-zoomed .d:nth-child(3),
+  .hand .card.is-zoomed .m-grid .m:nth-child(3) { animation-delay: 0.48s; }
+  .hand .card.is-zoomed .steps .row:nth-child(4),
+  .hand .card.is-zoomed .d:nth-child(4) { animation-delay: 0.56s; }
+  .hand .card.is-zoomed .d:nth-child(5) { animation-delay: 0.64s; }
+  .hand .card.is-zoomed .d:nth-child(6) { animation-delay: 0.72s; }
+  /* chips: cascade across the row */
+  .hand .card.is-zoomed .chips span:nth-child(1) { animation-delay: 0.30s; }
+  .hand .card.is-zoomed .chips span:nth-child(2) { animation-delay: 0.34s; }
+  .hand .card.is-zoomed .chips span:nth-child(3) { animation-delay: 0.38s; }
+  .hand .card.is-zoomed .chips span:nth-child(4) { animation-delay: 0.42s; }
+  .hand .card.is-zoomed .chips span:nth-child(5) { animation-delay: 0.46s; }
+  .hand .card.is-zoomed .chips span:nth-child(6) { animation-delay: 0.50s; }
+  .hand .card.is-zoomed .chips span:nth-child(7) { animation-delay: 0.54s; }
+  .hand .card.is-zoomed .chips span:nth-child(8) { animation-delay: 0.58s; }
+  .hand .card.is-zoomed .chips span:nth-child(9) { animation-delay: 0.62s; }
+  .hand .card.is-zoomed .chips span:nth-child(10) { animation-delay: 0.66s; }
+  .hand .card.is-zoomed .chips span:nth-child(11) { animation-delay: 0.70s; }
+  .hand .card.is-zoomed .chips span:nth-child(12) { animation-delay: 0.74s; }
+
+  /* ────── content inside zoomed card ────── */
+  .card {
+    background: var(--paper);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.12);
+  }
+  .card-head .step-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--solar);
+    font-weight: 500;
+  }
+  .card-head .step-num .of { color: var(--muted); margin-left: 0.5em; }
+  .card-head .step-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    font-variation-settings: "opsz" 48, "SOFT" 30;
+  }
+  .card-head .step-title em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 48, "SOFT" 100, "WONK" 1;
+  }
+  .card-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    /* scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(20, 19, 26, 0.25) transparent;
+  }
+  .card-body::-webkit-scrollbar { width: 6px; }
+  .card-body::-webkit-scrollbar-thumb { background: rgba(20, 19, 26, 0.2); border-radius: 3px; }
+
+  .card--problem .big-text,
+  .card--solution .big-text {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.35;
+    font-variation-settings: "opsz" 48, "SOFT" 50;
+    max-width: 48rem;
+    color: var(--ink);
+  }
+  .card--problem .big-text strong,
+  .card--solution .big-text strong {
+    font-weight: 500;
+    color: var(--solar);
+    font-style: italic;
+    font-variation-settings: "opsz" 48, "SOFT" 100, "WONK" 1;
+  }
+  .card--solution .big-text strong { color: var(--ink); font-style: normal; font-variation-settings: "opsz" 48, "SOFT" 30; }
+  .card--solution .accent-rule {
+    width: 4rem; height: 3px; background: var(--solar);
+    margin-bottom: 1rem;
+  }
+
+  .card--metrics .card-body {
+    display: flex; align-items: center;
+  }
+  .card--metrics .m-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .card--metrics .m-grid .m {
+    padding: 2.5rem 1.75rem;
+    border-right: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .card--metrics .m-grid .m:last-child { border-right: none; }
+  .card--metrics .m-grid .m .big {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    font-weight: 400;
+    line-height: 1;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+  .card--metrics .m-grid .m .big em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  .card--metrics .m-grid .m .lbl {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .card--compare .rows {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem 2rem;
+    align-items: baseline;
+  }
+  .card--compare .rows .h {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .card--compare .rows .as {
+    font-family: var(--serif);
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+    padding: 0.5rem 0;
+  }
+  .card--compare .rows .ar {
+    color: var(--solar);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .card--compare .rows .to {
+    font-family: var(--serif);
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    font-variation-settings: "opsz" 18, "SOFT" 30;
+    padding: 0.5rem 0;
+  }
+
+  .card--how .steps {
+    display: grid;
+    gap: 0;
+  }
+  .card--how .steps .row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 2rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.1);
+  }
+  .card--how .steps .row:last-child { border-bottom: none; }
+  .card--how .steps .row .stage {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--solar);
+    font-weight: 500;
+    padding-top: 0.15rem;
+  }
+  .card--how .steps .row .b {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .card--how .steps .row .b code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  .card--stack {
+    background: var(--ink);
+  }
+  .card--stack .card-head { border-bottom-color: rgba(245, 241, 232, 0.15); }
+  .card--stack .card-head .step-num { color: var(--solar-glow); }
+  .card--stack .card-head .step-num .of { color: rgba(245, 241, 232, 0.5); }
+  .card--stack .card-head .step-title { color: var(--paper); }
+  .card--stack .card-head .step-title em { color: var(--solar-glow); }
+  .card--stack .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+  }
+  .card--stack .chips span {
+    border: 1px solid rgba(245, 241, 232, 0.25);
+    padding: 0.5rem 0.85rem;
+    border-radius: 1px;
+    color: var(--paper);
+    background: rgba(245, 241, 232, 0.03);
+  }
+
+  .card--decisions .d {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--solar);
+  }
+  .card--decisions .d:last-child { margin-bottom: 0; }
+  .card--decisions .d .ti {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.45rem;
+    line-height: 1.3;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+  }
+  .card--decisions .d .de {
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .card--decisions .d .de code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--ink);
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ───────────── REVEAL ANIMATIONS ───────────── */
+  /* NOTE: do NOT use `transform` here — a non-none transform creates a
+     containing block for position:fixed descendants and breaks the
+     click-to-zoom modal (it would position relative to the article). */
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+  }
+
+  /* ───────────── RESPONSIVE ───────────── */
+  @media (max-width: 768px) {
+    nav.top { padding: 1rem 1.25rem; }
+    nav.top ul { gap: 1rem; }
+    nav.top ul a { font-size: 0.68rem; }
+
+    .hero { padding: 7rem 1.25rem 3rem; min-height: auto; }
+    .hero .meta { gap: 1.5rem 2rem; }
+
+    section { padding: 4rem 1.25rem; }
+
+    .section-head { grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 2.5rem; }
+    .section-head .num { font-size: 0.75rem; }
+
+    .ps-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.75rem;
+    }
+
+    .metrics {
+      grid-template-columns: 1fr;
+    }
+    .metrics .metric {
+      border-right: none;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+      padding: 1.5rem 0;
+    }
+    .metrics .metric:last-child { border-bottom: none; }
+
+    .compare .rows {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .compare .arrow { display: none; }
+    .compare .to-be {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.1);
+    }
+
+    .how .step {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .other-projects { grid-template-columns: 1fr; }
+
+    footer .inner { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* deck responsive */
+    .card {
+      padding: 2rem 1.5rem 2.25rem;
+      min-height: 28rem;
+      gap: 1.25rem;
+    }
+    .card-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 0.85rem; }
+    .card--metrics .m-grid { grid-template-columns: 1fr; }
+    .card--metrics .m-grid .m {
+      border-right: none;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+      padding: 1.5rem 0;
+    }
+    .card--metrics .m-grid .m:last-child { border-bottom: none; }
+    .card--compare .rows { grid-template-columns: 1fr; gap: 0.6rem; }
+    .card--compare .rows .ar { display: none; }
+    .card--compare .rows .to {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.1);
+    }
+    .card--how .steps .row { grid-template-columns: 1fr; gap: 0.4rem; }
+
+    /* hand layout — single column scroll on mobile */
+    .hand {
+      height: auto;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hand .card {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      margin-left: 0;
+      transform: none !important;
+      width: 100%;
+      max-width: 22rem;
+      height: auto;
+      min-height: 9rem;
+    }
+    .hand .card:hover {
+      transform: translateY(-3px) !important;
+    }
+    .hand .card .card-body {
+      -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+    }
+    .hand .card.is-zoomed {
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── NAV ───────── -->
+<nav class="top" id="topnav">
+  <div class="brand">Naman Sanghavi<span class="dot">.</span></div>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#other">Other</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ───────── HERO ───────── -->
+<header class="hero">
+  <div class="eyebrow">
+    <span class="pulse"></span>
+    Available · AI / ML Engineer · Mumbai → open to relocation
+  </div>
+  <h1>
+    Production AI,<br />
+    not just <em>notebooks.</em>
+  </h1>
+  <p class="lede">
+    AI/ML Engineer shipping production systems at <strong>Waaree Energies</strong> — lead propensity scoring live in Dynamics 365, hybrid RAG over scientific PDFs, and a full-stack patent intelligence pipeline. Comfortable end-to-end: data → model → API → CRM → production monitoring.
+  </p>
+  <div class="meta">
+    <div>
+      <span class="label">Education</span>
+      <span class="value">B.Tech AIML · NMIMS '26</span>
+    </div>
+    <div>
+      <span class="label">Currently</span>
+      <span class="value">Waaree Energies · Mumbai</span>
+    </div>
+    <div>
+      <span class="label">Reach</span>
+      <span class="value">
+        <a href="/cdn-cgi/l/email-protection#a0cec1cdc1ced3c1cec7c8c1d6c9979094e0c7cdc1c9cc8ec3cfcd">Email</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/naman-sanghavi-99010224b/" target="_blank" rel="noopener">LinkedIn</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/namansanghavi" target="_blank" rel="noopener">GitHub</a>
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── FEATURED WORK ───────── -->
+<section id="work">
+  <div class="section-head reveal">
+    <span class="num">/ 01</span>
+    <h2>Selected <em>work.</em></h2>
+  </div>
+
+  <!-- ─── PROJECT 1 — LEAD PROPENSITY ─── -->
+  <article class="project reveal" id="propensity">
+    <div class="project-head">
+      <span class="tag">Project 01 · Production · Live in CRM</span>
+      <h3>AI Lead Propensity <em>Scoring.</em></h3>
+      <p class="tagline">Production lead-scoring system live inside Microsoft Dynamics 365 CRM — reps now work an AI-ranked queue instead of arrival order.</p>
+    </div>
+
+    <div class="video-wrap" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1820 0%, #2a2730 100%);">
+      <div style="text-align: center; padding: 2rem; max-width: 32rem;">
+        <div style="font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--solar-glow); margin-bottom: 1.25rem;">Live inside the CRM</div>
+        <div style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.4rem; line-height: 1.4; color: var(--paper); font-variation-settings: 'opsz' 36, 'SOFT' 60;">
+          Demo runs against production Dynamics 365 data and isn't shareable externally. Happy to walk through it on a call — including the model card, SHAP plots, and live scoring queue.
+        </div>
+      </div>
+    </div>
+
+    <div class="hand-wrap">
+      <div class="hand">
+
+        <article class="card card--problem is-hint" data-step-title="Problem" style="--i: 0; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">01 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>problem.</em></h4>
+          </div>
+          <div class="card-body" data-preview="~7,000 leads/month, &lt;10% convert. Reps had no way to know which to call first.">
+            <p class="big-text">Waaree receives <strong>~7,000 leads / month</strong> with under 10% converting. Reps had no way to know which to call first — every lead looked the same in the inbox.</p>
+          </div>
+          <span class="corner-badge">01 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--solution" data-step-title="Solution" style="--i: 1; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">02 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>solution.</em></h4>
+          </div>
+          <div class="card-body" data-preview="An AI system that scores every new lead 0–100 and tags Hot / Warm / Cold inside the CRM.">
+            <div class="accent-rule"></div>
+            <p class="big-text">Built an AI system that <strong>scores every new lead 0–100 within minutes</strong> and tags it Hot / Warm / Cold directly inside the CRM — reps now work an AI-ranked queue instead of arrival order.</p>
+          </div>
+          <span class="corner-badge">02 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--metrics" data-step-title="Impact" style="--i: 2; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">03 <span class="of">/ 07</span></span>
+            <h4 class="step-title">By the <em>numbers.</em></h4>
+          </div>
+          <div class="card-body" data-preview="80% accuracy on 10,310 unseen leads · ~2–5× lift vs random calling.">
+            <div class="m-grid">
+              <div class="m">
+                <div class="big"><em>80%</em></div>
+                <div class="lbl">Accuracy on 10,310 unseen leads</div>
+              </div>
+              <div class="m">
+                <div class="big">&gt; <em>70</em></div>
+                <div class="lbl">Confidence score for Hot tier</div>
+              </div>
+              <div class="m">
+                <div class="big"><em>~2–5×</em></div>
+                <div class="lbl">Lift vs. random calling</div>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">03 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--compare" data-step-title="Before / After" style="--i: 3; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">04 <span class="of">/ 07</span></span>
+            <h4 class="step-title">As-is <em>→</em> to-be.</h4>
+          </div>
+          <div class="card-body" data-preview="No prioritisation → AI-ranked queue · ~10% conversion → target 15–20%.">
+            <div class="rows">
+              <div class="h">Before</div>
+              <div class="h ar"></div>
+              <div class="h">After</div>
+              <div class="as">No prioritisation — reps dial in arrival order</div>
+              <div class="ar">→</div>
+              <div class="to">AI-ranked queue, Hot-tier leads first</div>
+              <div class="as">~10% conversion across the funnel</div>
+              <div class="ar">→</div>
+              <div class="to">Target 15–20% on AI-prioritised pipeline</div>
+              <div class="as">Scattered effort across all leads</div>
+              <div class="ar">→</div>
+              <div class="to">Focused on high-value, high-probability wins</div>
+              <div class="as">Delayed response to incoming leads</div>
+              <div class="ar">→</div>
+              <div class="to">Immediate response on Hot leads, in minutes</div>
+            </div>
+          </div>
+          <span class="corner-badge">04 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--how" data-step-title="How it works" style="--i: 4; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">05 <span class="of">/ 07</span></span>
+            <h4 class="step-title">How it <em>works.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Pull leads from Dynamics → XGBoost score → business rules → write tier back to CRM.">
+            <div class="steps">
+              <div class="row">
+                <span class="stage">Pipeline</span>
+                <p class="b">Pull new leads from Dynamics 365 (OAuth2 + OData) → preprocess (32 features) → XGBoost score → business-rule overrides → write score, tier &amp; reason back to CRM.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Model</span>
+                <p class="b">XGBoost trained on 32,701 historical leads; out-of-time tested on 10,310. 32 engineered features across categorical, high-cardinality (target-encoded), numeric, and missingness-flag inputs.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Business rules</span>
+                <p class="b">Order size ≥ 50 kW forces Hot tier — captures domain knowledge the model under-weights on rare large orders.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Production</span>
+                <p class="b">Runs unattended every 30 minutes via Windows Task Scheduler; safety rails include a 5,000-lead cap per run, score-once policy, and incremental state tracking.</p>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">05 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--stack" data-step-title="Stack" style="--i: 5; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">06 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>stack.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Python · XGBoost · scikit-learn · Dynamics 365 · Dataverse · OAuth2 / OData v4">
+            <div class="chips">
+              <span>Python</span><span>XGBoost</span><span>scikit-learn</span><span>pandas</span>
+              <span>Microsoft Dynamics 365</span><span>Dataverse</span><span>OAuth2 / OData v4</span>
+              <span>Windows Task Scheduler</span>
+            </div>
+          </div>
+          <span class="corner-badge">06 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--decisions" data-step-title="Engineering decisions" style="--i: 6; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">07 <span class="of">/ 07</span></span>
+            <h4 class="step-title">Key <em>decisions.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Batch sync into CRM, not a separate dashboard. Business rules layered on top of ML. Score-once policy.">
+            <div class="d">
+              <div class="ti">Batch sync into CRM, not a separate dashboard.</div>
+              <div class="de">Sales reps live in Dynamics — pushing scores into their existing tool drove adoption far better than building a parallel UI.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Business rules as a layer on top of ML.</div>
+              <div class="de">Pure model scores under-call rare large orders. The 50 kW override captures domain knowledge the model can't learn statistically from few examples.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Score-once policy.</div>
+              <div class="de">Locks in the score at lead intake instead of re-scoring on every edit — prevents noise from reps updating descriptions.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Rule-trigger reason field.</div>
+              <div class="de">Telling reps <em>why</em> a lead is Hot ("order size 80 kW") turned a black-box score into something they trust and act on.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Out-of-time validation, not random split.</div>
+              <div class="de">Tested on Feb–Apr 2026 data after training on Jun 2025 – Jan 2026 — mirrors how the model is actually used in production.</div>
+            </div>
+          </div>
+          <span class="corner-badge">07 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── PROJECT 2 — RESEARCH RAG ─── -->
+  <article class="project reveal" id="rag">
+    <div class="project-head">
+      <span class="tag">Project 02 · Live Beta · On-prem RAG</span>
+      <h3>Research Paper <em>Intelligence.</em></h3>
+      <p class="tagline">GROBID-powered RAG over scientific PDFs — hybrid retrieval with citation-grounded answers, on-prem.</p>
+    </div>
+
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/17vNdFql9SBrkBnJsuSe6V6drZEJTwRCT/preview" allow="autoplay" allowfullscreen></iframe>
+      <span class="caption">▶ 2-min demo</span>
+    </div>
+
+    <div class="hand-wrap">
+      <div class="hand">
+
+        <article class="card card--problem is-hint" data-step-title="Problem" style="--i: 0; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">01 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>problem.</em></h4>
+          </div>
+          <div class="card-body" data-preview="R&amp;D reads 30–40 papers/week. Generic chatbots miss exact terms, lose context after 20 pages.">
+            <p class="big-text">Waaree's R&amp;D team reads <strong>30–40 papers a week.</strong> Generic PDF chatbots lose section structure, miss exact technical terms ("ORR", "Pt/C 20%"), and free LLMs lose context after ~20 pages.</p>
+          </div>
+          <span class="corner-badge">01 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--solution" data-step-title="Solution" style="--i: 1; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">02 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>solution.</em></h4>
+          </div>
+          <div class="card-body" data-preview="On-prem RAG. GROBID parses PDFs. 4-stage hybrid retrieval. Citation-grounded answers.">
+            <div class="accent-rule"></div>
+            <p class="big-text">An on-prem RAG system that parses scientific PDFs with <strong>GROBID</strong>, retrieves with a 4-stage hybrid pipeline (vector + BM25 + RRF + cross-encoder rerank), and returns <strong>citation-grounded answers</strong> across Q&amp;A, comparison, and summarisation tasks.</p>
+          </div>
+          <span class="corner-badge">02 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--metrics" data-step-title="Impact" style="--i: 2; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">03 <span class="of">/ 07</span></span>
+            <h4 class="step-title">By the <em>numbers.</em></h4>
+          </div>
+          <div class="card-body" data-preview="~1 hr → seconds per paper · 4-stage hybrid retrieval · live beta.">
+            <div class="m-grid">
+              <div class="m">
+                <div class="big"><em>~1 hr → sec</em></div>
+                <div class="lbl">Time to answer per paper</div>
+              </div>
+              <div class="m">
+                <div class="big"><em>4-stage</em></div>
+                <div class="lbl">Hybrid retrieval pipeline</div>
+              </div>
+              <div class="m">
+                <div class="big"><em>Live Beta</em></div>
+                <div class="lbl">End-to-end production</div>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">03 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--compare" data-step-title="Before / After" style="--i: 3; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">04 <span class="of">/ 07</span></span>
+            <h4 class="step-title">As-is <em>→</em> to-be.</h4>
+          </div>
+          <div class="card-body" data-preview="1hr / paper → seconds · LLM context loss → section-aware chunking.">
+            <div class="rows">
+              <div class="h">Before</div>
+              <div class="h ar"></div>
+              <div class="h">After</div>
+              <div class="as">~1 hour per paper to read &amp; note</div>
+              <div class="ar">→</div>
+              <div class="to">Indexed once, ask anytime in seconds</div>
+              <div class="as">Free LLMs lose context after 20 pages</div>
+              <div class="ar">→</div>
+              <div class="to">Section-aware chunking, no context loss</div>
+              <div class="as">Can't compare 2 papers section-by-section</div>
+              <div class="ar">→</div>
+              <div class="to">Cross-paper Q&amp;A with cited evidence</div>
+              <div class="as">Generic parsers lose tables, citations, figures</div>
+              <div class="ar">→</div>
+              <div class="to">GROBID preserves structure + extracts citations</div>
+            </div>
+          </div>
+          <span class="corner-badge">04 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--how" data-step-title="How it works" style="--i: 4; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">05 <span class="of">/ 07</span></span>
+            <h4 class="step-title">How it <em>works.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Ingest with GROBID → vector + BM25 + RRF + rerank → Gemini / Mistral answer.">
+            <div class="steps">
+              <div class="row">
+                <span class="stage">Ingest</span>
+                <p class="b">Drop a PDF in <code>input/</code> (or POST to API) → GROBID parses it into TEI XML → custom parser cleans + marks sections → token-aware chunker (tiktoken, 800-token chunks) → BGE-large embeddings → Qdrant Cloud.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Retrieve</span>
+                <p class="b">4-stage hybrid pipeline — vector search (top 20) + BM25 keyword search (top 20) → Reciprocal Rank Fusion (scale-invariant) → cross-encoder rerank (MiniLM) → top 5 to LLM.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Generate</span>
+                <p class="b">Gemini 2.5 Flash by default · Flash Lite for simple queries · Mistral 7B (HF) as fallback · multi-key rotation · 24-hour query cache · per-call usage log.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Operate</span>
+                <p class="b">Watchdog auto-ingests new PDFs · FastAPI exposes <code>/ingest</code>, <code>/qa</code>, <code>/compare</code>, <code>/summarize</code> · Streamlit primary UI, React frontend in development.</p>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">05 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--stack" data-step-title="Stack" style="--i: 5; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">06 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>stack.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Python · FastAPI · GROBID · Qdrant · BGE-large · BM25 + RRF · Gemini 2.5">
+            <div class="chips">
+              <span>Python</span><span>FastAPI</span><span>GROBID (Docker)</span><span>Qdrant Cloud</span>
+              <span>BAAI/bge-large-en-v1.5</span><span>rank_bm25 + RRF</span><span>ms-marco-MiniLM cross-encoder</span>
+              <span>Gemini 2.5 Flash / Flash Lite</span><span>Mistral 7B (HF)</span><span>tiktoken</span>
+              <span>Streamlit + React</span>
+            </div>
+          </div>
+          <span class="corner-badge">06 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--decisions" data-step-title="Engineering decisions" style="--i: 6; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">07 <span class="of">/ 07</span></span>
+            <h4 class="step-title">Key <em>decisions.</em></h4>
+          </div>
+          <div class="card-body" data-preview="GROBID as a service. Hybrid retrieval — all four stages earn their place.">
+            <div class="d">
+              <div class="ti">GROBID as a service, not a library.</div>
+              <div class="de">Wrapping a mature Java parser in Python would re-implement years of work badly. Running it as a Docker service keeps the pipeline lightweight and lets GROBID upgrade independently.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Hybrid retrieval — all four stages earn their place.</div>
+              <div class="de">Vector alone misses exact terms ("ORR", "Pt/C 20%"); BM25 alone misses paraphrases; RRF merges them without normalising scores; cross-encoder rerank gives final precision on the top 10.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Two Qdrant collections.</div>
+              <div class="de"><code>chunks</code> for retrieval, <code>doc_records</code> for paper-level operations (listing, similar-paper lookup). Payload indexes on <code>doc_id / main_section / is_terminal</code> turn filtered queries from full-scans into O(log n).</div>
+            </div>
+            <div class="d">
+              <div class="ti">Multi-key Gemini rotation + Mistral fallback.</div>
+              <div class="de">Free-tier rate limits would otherwise kill the system during heavy ingestion. Rotation + fallback + 24h cache keeps it usable end-to-end.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Terminal-section filtering.</div>
+              <div class="de">References / Acknowledgements chunks are marked at parse time and excluded from retrieval — so the LLM can never accidentally cite a bibliography line as evidence.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Token-aware chunking with tiktoken (cl100k_base).</div>
+              <div class="de">Exact token counts prevent silent overflows into Gemini; chunks respect section boundaries so context never bleeds across topics.</div>
+            </div>
+          </div>
+          <span class="corner-badge">07 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── PROJECT 3 — PATENT PIPELINE ─── -->
+  <article class="project reveal" id="patent">
+    <div class="project-head">
+      <span class="tag">Project 03 · Phase 1 Live · Full-stack</span>
+      <h3>Patent Intelligence <em>Pipeline.</em></h3>
+      <p class="tagline">Full-stack patent intelligence — scrape, extract, annotate, and answer questions on any Google Patents URL.</p>
+    </div>
+
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/14V7Qojdf8lCIuvX46zxXKyVuPS9YUH-l/preview" allow="autoplay" allowfullscreen></iframe>
+      <span class="caption">▶ 2-min demo</span>
+    </div>
+
+    <div class="hand-wrap">
+      <div class="hand">
+
+        <article class="card card--problem is-hint" data-step-title="Problem" style="--i: 0; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">01 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>problem.</em></h4>
+          </div>
+          <div class="card-body" data-preview="R&amp;D engineers spend hours mapping numerals to components. PatSnap / Cipher are costly.">
+            <p class="big-text">R&amp;D engineers spend <strong>hours per patent</strong> mapping reference numerals to component names, then translating preferred-embodiment text into lab-reproduction steps. Commercial platforms like PatSnap and Cipher are expensive — and still don't expose lab-reproduction guidance.</p>
+          </div>
+          <span class="corner-badge">01 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--solution" data-step-title="Solution" style="--i: 1; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">02 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>solution.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Paste a Google Patents URL. Scrape, annotate figures, answer 5 standard R&amp;D questions.">
+            <div class="accent-rule"></div>
+            <p class="big-text">A full-stack web app that takes a Google Patents URL, <strong>scrapes the patent end-to-end, annotates figures with component labels</strong>, and answers 5 standard R&amp;D questions — including step-by-step lab reproduction — in a single page.</p>
+          </div>
+          <span class="corner-badge">02 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--metrics" data-step-title="Impact" style="--i: 2; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">03 <span class="of">/ 07</span></span>
+            <h4 class="step-title">By the <em>numbers.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Hours → minutes per patent · 5 Q&amp;A · phase 1 live.">
+            <div class="m-grid">
+              <div class="m">
+                <div class="big"><em>Hours → mins</em></div>
+                <div class="lbl">Engineer review time per patent</div>
+              </div>
+              <div class="m">
+                <div class="big"><em>5 Q&amp;A</em></div>
+                <div class="lbl">Standard questions per patent</div>
+              </div>
+              <div class="m">
+                <div class="big"><em>Phase 1 Live</em></div>
+                <div class="lbl">Scraping + extraction in production</div>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">03 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--compare" data-step-title="Before / After" style="--i: 3; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">04 <span class="of">/ 07</span></span>
+            <h4 class="step-title">As-is <em>→</em> to-be.</h4>
+          </div>
+          <div class="card-body" data-preview="Engineers read manually → bot extracts; engineer just reviews.">
+            <div class="rows">
+              <div class="h">Before</div>
+              <div class="h ar"></div>
+              <div class="h">After</div>
+              <div class="as">Engineers manually read &amp; explain each patent</div>
+              <div class="ar">→</div>
+              <div class="to">Bot extracts; engineer just reviews the output</div>
+              <div class="as">Figure refs hard to follow ("Fig 2 callout 14…")</div>
+              <div class="ar">→</div>
+              <div class="to">Figures annotated with component-name overlays</div>
+              <div class="as">Existing tools fail on complex patent PDFs</div>
+              <div class="ar">→</div>
+              <div class="to">Two-tier scraping handles structure, text &amp; figures</div>
+              <div class="as">Commercial platforms (PatSnap, Cipher) are costly</div>
+              <div class="ar">→</div>
+              <div class="to">Open stack with LLM-driven Q&amp;A out of the box</div>
+            </div>
+          </div>
+          <span class="corner-badge">04 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--how" data-step-title="How it works" style="--i: 4; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">05 <span class="of">/ 07</span></span>
+            <h4 class="step-title">How it <em>works.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Selenium scrape → NLTK extract → Tesseract annotate → Gemini answer.">
+            <div class="steps">
+              <div class="row">
+                <span class="stage">Scrape</span>
+                <p class="b">Selenium pulls high-resolution figure URLs from Google Patents → PyMuPDF renders the PDF at 300 DPI as fallback → BeautifulSoup extracts metadata, abstract, description, and claims.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Extract</span>
+                <p class="b">Regex finds reference-number candidates in the Preferred Embodiment section → NLTK POS tagging filters out non-nouns and generic terms → produces <code>ref_number → component_name</code> mapping with low-confidence flags.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Annotate</span>
+                <p class="b">Tesseract OCR locates reference numbers on each figure → Pillow draws component-name labels with semi-transparent backgrounds → saves annotated PNG alongside the original.</p>
+              </div>
+              <div class="row">
+                <span class="stage">Answer</span>
+                <p class="b">5-question Q&amp;A pipeline — Q1/Q3/Q4 (owner / dates / jurisdiction) answered instantly from metadata; Q2 (invention summary) and Q5 (lab-reproduction guide) generated by Gemini 2.5.</p>
+              </div>
+            </div>
+          </div>
+          <span class="corner-badge">05 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--stack" data-step-title="Stack" style="--i: 5; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">06 <span class="of">/ 07</span></span>
+            <h4 class="step-title">The <em>stack.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Python · Flask · Selenium · BeautifulSoup · PyMuPDF · Tesseract · Gemini 2.5">
+            <div class="chips">
+              <span>Python</span><span>Flask</span><span>Waitress (WSGI)</span><span>Selenium</span>
+              <span>BeautifulSoup</span><span>PyMuPDF</span><span>NLTK (POS tagging)</span>
+              <span>Tesseract OCR</span><span>Pillow</span><span>Google Gemini 2.5</span>
+              <span>Mistral 7B (HF) fallback</span><span>Vanilla JS / CSS Grid</span>
+            </div>
+          </div>
+          <span class="corner-badge">06 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+        <article class="card card--decisions" data-step-title="Engineering decisions" style="--i: 6; --n: 7;" tabindex="0">
+          <div class="card-head">
+            <span class="step-num">07 <span class="of">/ 07</span></span>
+            <h4 class="step-title">Key <em>decisions.</em></h4>
+          </div>
+          <div class="card-body" data-preview="Two-tier figure scraping. Hybrid Q&amp;A router — LLM only where it earns its place.">
+            <div class="d">
+              <div class="ti">Two-tier figure scraping.</div>
+              <div class="de">Selenium first — the hi-res <code>D000xx</code> URLs only load after Google Patents' JavaScript runs. PyMuPDF rendering at 300 DPI as a fallback guarantees 100% figure coverage even when scraping fails.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Hybrid Q&amp;A router — LLM only where it earns its place.</div>
+              <div class="de">Q1/Q3/Q4 are pure metadata lookups; spending a Gemini call on them would waste tokens and add latency. Q2 (summary) and Q5 (reproduction guide) are where language quality matters, so they go to Gemini.</div>
+            </div>
+            <div class="d">
+              <div class="ti">NLTK POS filtering for component names.</div>
+              <div class="de">Raw regex matches on reference numbers pick up generic words ("layer", "film", "substrate"). POS tagging filters down to genuine noun phrases; low-confidence picks are flagged with (?) so engineers can verify rather than trust blindly.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Filesystem-per-patent, no database.</div>
+              <div class="de">Each patent gets its own folder with metadata.json, abstract.txt, description.txt, claims.txt, and figures/. Portable — zip the directory and the entire patent corpus moves with it. No schema migrations, no DB to host.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Every stage is independently callable.</div>
+              <div class="de">Component extraction and figure annotation each have their own REST endpoint, so engineers can re-run a single stage without re-scraping. Helpful when tuning the OCR / NLTK steps on already-scraped patents.</div>
+            </div>
+            <div class="d">
+              <div class="ti">Async background scraping with in-memory job locks.</div>
+              <div class="de">Scraping is slow (Selenium + figure downloads). Kicked off as a background thread; frontend polls <code>/api/status</code>. A <code>threading.Lock</code> prevents the same patent from being scraped twice concurrently.</div>
+            </div>
+          </div>
+          <span class="corner-badge">07 / 07</span>
+          <button class="card-close" aria-label="Close">×</button>
+        </article>
+
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ───────── OTHER PROJECTS ───────── -->
+<section id="other">
+  <div class="section-head reveal">
+    <span class="num">/ 02</span>
+    <h2>Other <em>builds.</em></h2>
+  </div>
+
+  <div class="other-projects">
+    <article class="other-card reveal">
+      <div class="tag">Computer Vision · Academic</div>
+      <h4>Hybrid Defect Detection for Manufacturing QA.</h4>
+      <p>Hybrid framework combining supervised deep learning with unsupervised anomaly detection — catches both known and unknown defects in manufacturing imagery. Designed for real-time quality inspection; ready for manufacturing-unit deployment.</p>
+      <div class="stack-mini">Deep Learning · Anomaly Detection · OpenCV</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">GenAI · Academic</div>
+      <h4>RAG QA system for YouTube videos &amp; PDFs.</h4>
+      <p>Earlier RAG chatbot enabling natural-language queries over video + PDF content. Whisper for transcription, vector DB for retrieval, Streamlit frontend, LLM-powered context-aware responses.</p>
+      <div class="stack-mini">Whisper · Vector DB · LLMs · Streamlit</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">Data Science · Academic</div>
+      <h4>Energy Demand Forecasting — Hierarchical Time Series.</h4>
+      <p>Hierarchical forecasts for India's state-wise electricity demand using Prophet. Modelled trend and seasonality patterns; EDA on regional consumption patterns to uncover demand-side insights.</p>
+      <div class="stack-mini">Prophet · pandas · time series</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">Deep Learning · Academic</div>
+      <h4>Image Caption Generator — Encoder-Decoder.</h4>
+      <p>CNN (VGG) feature extractor with LSTM decoder for image-to-text generation. Data preprocessing and feature engineering to improve BLEU on a standard captioning benchmark.</p>
+      <div class="stack-mini">CNN (VGG) · LSTM · Keras</div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────── FOOTER / CONTACT ───────── -->
+<footer id="contact">
+  <div class="inner">
+    <div>
+      <h3>Let's build <em>something.</em></h3>
+      <p style="font-family: var(--serif); font-weight: 300; font-size: 1.1rem; line-height: 1.6; max-width: 28rem; color: var(--paper); opacity: 0.85; font-variation-settings: 'opsz' 24, 'SOFT' 50;">
+        Open to AI/ML Engineer roles in Mumbai and Bangalore — especially product companies and AI-first startups. Always up for a chat about RAG, propensity models, or anything production AI.
+      </p>
+    </div>
+    <div class="contacts">
+      <div class="contact-line">
+        <span class="label">Email</span>
+        <a href="/cdn-cgi/l/email-protection#543a3539353a27353a333c35223d636460143339353d387a373b39"><span class="__cf_email__" data-cfemail="3d535c505c534e5c535a555c4b540a0d097d5a505c5451135e5250">[email&#160;protected]</span></a>
+      </div>
+      <div class="contact-line">
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/naman-sanghavi-99010224b/" target="_blank" rel="noopener">/in/naman-sanghavi</a>
+      </div>
+      <div class="contact-line">
+        <span class="label">GitHub</span>
+        <a href="https://github.com/namansanghavi" target="_blank" rel="noopener">@namansanghavi</a>
+      </div>
+      <div class="contact-line">
+        <span class="label">Phone</span>
+        <a href="tel:+919265621688">+91 92656 21688</a>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <span>© 2026 Naman Sanghavi · Mumbai</span>
+    <span style="opacity: 0.6;">Built with care · No frameworks · ~30 KB</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll-triggered reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "-50px 0px" });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  // Nav border on scroll
+  const nav = document.getElementById("topnav");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) nav.classList.add("scrolled");
+    else nav.classList.remove("scrolled");
+  });
+
+  // ───────── HAND OF CARDS: hover + click-to-zoom ─────────
+  const backdrop = document.createElement("div");
+  backdrop.className = "hand-backdrop";
+  document.body.appendChild(backdrop);
+
+  let zoomed = null;
+
+  function rectOf(el) { return el.getBoundingClientRect(); }
+
+  function zoomIn(card) {
+    if (zoomed === card) return;
+    if (zoomed) zoomOut(zoomed, true); // close any open one immediately
+
+    const r = rectOf(card);
+
+    // Pin to its exact current screen position, no transform
+    card.style.position = "fixed";
+    card.style.top = r.top + "px";
+    card.style.left = r.left + "px";
+    card.style.width = r.width + "px";
+    card.style.height = r.height + "px";
+    card.style.margin = "0";
+    card.style.transform = "none";
+    card.style.zIndex = "1000";
+
+    // force reflow so the next style changes animate
+    void card.offsetHeight;
+
+    card.classList.add("is-zoomed");
+
+    // target size: comfortable big card centred in viewport
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const tW = Math.min(vw * 0.9, 920);
+    const tH = Math.min(vh * 0.88, 720);
+    card.style.top = ((vh - tH) / 2) + "px";
+    card.style.left = ((vw - tW) / 2) + "px";
+    card.style.width = tW + "px";
+    card.style.height = tH + "px";
+
+    backdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+    zoomed = card;
+  }
+
+  function zoomOut(card, immediate) {
+    if (!card || !card.classList.contains("is-zoomed")) return;
+
+    // Find where the card would naturally sit (in the hand)
+    // by temporarily clearing inline styles + the .is-zoomed class
+    const saved = {
+      top: card.style.top, left: card.style.left,
+      width: card.style.width, height: card.style.height,
+      position: card.style.position, transform: card.style.transform,
+      margin: card.style.margin, zIndex: card.style.zIndex,
+    };
+
+    card.classList.remove("is-zoomed");
+    card.style.position = "";
+    card.style.top = "";
+    card.style.left = "";
+    card.style.width = "";
+    card.style.height = "";
+    card.style.transform = "";
+    card.style.margin = "";
+    card.style.zIndex = "";
+
+    const target = rectOf(card);
+
+    if (immediate) {
+      // Restore (no animation) — used when switching cards
+      zoomed = null;
+      return;
+    }
+
+    // Re-apply current "zoomed" position so we can animate to target
+    card.classList.add("is-zoomed");
+    card.style.position = saved.position;
+    card.style.top = saved.top;
+    card.style.left = saved.left;
+    card.style.width = saved.width;
+    card.style.height = saved.height;
+    card.style.margin = saved.margin;
+    card.style.zIndex = saved.zIndex;
+
+    void card.offsetHeight;
+
+    card.style.top = target.top + "px";
+    card.style.left = target.left + "px";
+    card.style.width = target.width + "px";
+    card.style.height = target.height + "px";
+
+    const cleanup = () => {
+      card.classList.remove("is-zoomed");
+      card.style.position = "";
+      card.style.top = "";
+      card.style.left = "";
+      card.style.width = "";
+      card.style.height = "";
+      card.style.transform = "";
+      card.style.margin = "";
+      card.style.zIndex = "";
+      card.removeEventListener("transitionend", onEnd);
+    };
+    const onEnd = (e) => {
+      // wait for the top property to finish (it's always animated)
+      if (e.propertyName === "top") cleanup();
+    };
+    card.addEventListener("transitionend", onEnd);
+    // safety: cleanup after max transition duration
+    setTimeout(() => {
+      if (card.classList.contains("is-zoomed")) cleanup();
+    }, 700);
+
+    backdrop.classList.remove("active");
+    document.body.style.overflow = "";
+    zoomed = null;
+  }
+
+  // Wire up all hand cards
+  document.querySelectorAll(".hand .card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      // Don't toggle if user clicked the close button or a link inside
+      if (e.target.closest(".card-close")) return;
+      if (card.classList.contains("is-zoomed")) return;
+      // Remove the hint pulse once any card is opened
+      document.querySelectorAll(".hand .card.is-hint").forEach((c) => c.classList.remove("is-hint"));
+      zoomIn(card);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (!card.classList.contains("is-zoomed")) zoomIn(card);
+      }
+    });
+    const closeBtn = card.querySelector(".card-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        zoomOut(card);
+      });
+    }
+  });
+
+  backdrop.addEventListener("click", () => { if (zoomed) zoomOut(zoomed); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && zoomed) zoomOut(zoomed);
+  });
+
+  // If viewport resizes while a card is zoomed, recentre
+  window.addEventListener("resize", () => {
+    if (!zoomed) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const tW = Math.min(vw * 0.9, 920);
+    const tH = Math.min(vh * 0.88, 720);
+    zoomed.style.top = ((vh - tH) / 2) + "px";
+    zoomed.style.left = ((vw - tW) / 2) + "px";
+    zoomed.style.width = tW + "px";
+    zoomed.style.height = tH + "px";
+  });
+</script>
+
+</body>
+</html>
