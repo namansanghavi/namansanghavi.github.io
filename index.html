@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Naman Sanghavi — AI/ML Engineer</title>
+<meta name="description" content="AI/ML Engineer · 3 production AI systems shipped at Waaree Energies · propensity modeling, hybrid RAG, full-stack document AI." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='serif'%3EN%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,30..100,0..1&family=JetBrains+Mono:wght@300..600&family=Geist:wght@300..600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink: #14131a;
+    --paper: #f5f1e8;
+    --paper-2: #ede7d6;
+    --paper-3: #e3dcc7;
+    --solar: #c8932b;
+    --solar-glow: #e8b547;
+    --rule: #2a2730;
+    --muted: #6b6770;
+    --link: #1e2761;
+
+    --serif: "Fraunces", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --sans: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 0.08, 0 0 0 0 0.07, 0 0 0 0 0.10, 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: var(--solar); color: var(--ink); }
+
+  /* ───────────── NAV ───────────── */
+  nav.top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.1rem 2rem;
+    background: rgba(245, 241, 232, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.top.scrolled { border-bottom-color: rgba(20, 19, 26, 0.1); }
+
+  nav.top .brand {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.1rem;
+    font-variation-settings: "opsz" 14, "SOFT" 50;
+    letter-spacing: -0.01em;
+  }
+  nav.top .brand .dot { color: var(--solar); }
+
+  nav.top ul {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+    align-items: baseline;
+  }
+  nav.top ul a {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+  nav.top ul a:hover { color: var(--solar); }
+
+  /* ───────────── HERO ───────────── */
+  .hero {
+    min-height: 90vh;
+    padding: 7rem 2rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: var(--solar);
+  }
+  .hero .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--solar);
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--solar);
+  }
+
+  .hero .lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 40rem;
+    font-variation-settings: "opsz" 36, "SOFT" 50;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  .hero .lede strong {
+    font-weight: 500;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+
+  .hero .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 3rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+  .hero .meta div .label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .hero .meta div .value {
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .hero .meta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--solar);
+    padding-bottom: 1px;
+    transition: color 0.2s ease;
+  }
+  .hero .meta a:hover { color: var(--solar); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ───────────── TL;DR SIGNAL STRIP ───────────── */
+  .signals {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.75s forwards;
+  }
+  .signals .strip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .signals .strip .label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--solar-glow);
+    white-space: nowrap;
+  }
+  .signals .strip .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--paper);
+    line-height: 1.5;
+  }
+  .signals .strip .items b {
+    color: var(--solar-glow);
+    font-weight: 500;
+  }
+  .signals .strip .items .dot {
+    color: var(--muted);
+    margin: 0 0.25rem;
+  }
+
+  /* ───────────── SECTIONS ───────────── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--solar);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
+    font-variation-settings: "opsz" 72, "SOFT" 30;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+  }
+
+  /* ───────────── PROJECTS ───────────── */
+  .project {
+    margin-bottom: 7rem;
+    scroll-margin-top: 5rem;
+  }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-head {
+    margin-bottom: 2.5rem;
+  }
+  .project-head .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--solar);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .project-head h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    margin-bottom: 1rem;
+  }
+  .project-head h3 em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  .project-head .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--muted);
+    font-variation-settings: "opsz" 24, "SOFT" 50;
+    max-width: 50rem;
+  }
+
+  /* Video container */
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+    border: 1px solid rgba(20, 19, 26, 0.15);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-wrap .caption {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--paper);
+    background: rgba(20, 19, 26, 0.7);
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* In-CRM screenshots (for propensity, replaces video) */
+  .crm-shots {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .crm-shots .shot {
+    position: relative;
+    background: var(--paper-2);
+    border: 1px solid rgba(20, 19, 26, 0.12);
+    overflow: hidden;
+  }
+  .crm-shots .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .crm-shots .shot .caption {
+    position: absolute;
+    bottom: 0.75rem; left: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--paper);
+    background: rgba(20, 19, 26, 0.78);
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Problem / Solution block */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem 3rem;
+    margin-bottom: 2.5rem;
+    padding: 2rem 2.5rem;
+    background: var(--paper-2);
+    border-left: 3px solid var(--solar);
+  }
+  .ps-grid .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    padding-top: 0.4rem;
+  }
+  .ps-grid .text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    font-weight: 400;
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+  }
+  .ps-grid .text strong {
+    font-weight: 600;
+    font-variation-settings: "opsz" 18, "SOFT" 30;
+  }
+
+  /* Metrics row */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 2.5rem;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .metrics .metric {
+    padding: 1.75rem 1.5rem;
+    border-right: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .metrics .metric:last-child { border-right: none; }
+  .metrics .metric .big {
+    font-family: var(--serif);
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .metrics .metric .big em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  .metrics .metric .label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* AS-IS / TO-BE table */
+  .compare {
+    margin-bottom: 2.5rem;
+  }
+  .compare h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .compare .rows {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.5rem 2rem;
+    align-items: baseline;
+  }
+  .compare .header-row {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+  }
+  .compare .as-is {
+    font-family: var(--serif);
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    font-variation-settings: "opsz" 18, "SOFT" 50;
+    padding: 0.5rem 0;
+  }
+  .compare .arrow {
+    color: var(--solar);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .compare .to-be {
+    font-family: var(--serif);
+    color: var(--ink);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    font-weight: 500;
+    font-variation-settings: "opsz" 18, "SOFT" 30;
+    padding: 0.5rem 0;
+  }
+
+  /* ───────────── ACCORDION (Details) ───────────── */
+  .accordion {
+    border-top: 1px solid rgba(20, 19, 26, 0.15);
+    margin-top: 1rem;
+  }
+  .accordion details {
+    border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+    overflow: hidden;
+  }
+  .accordion summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1.25rem 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    transition: color 0.2s ease;
+  }
+  .accordion summary::-webkit-details-marker { display: none; }
+  .accordion summary:hover { color: var(--solar); }
+  .accordion summary:hover .acc-icon { border-color: var(--solar); color: var(--solar); }
+
+  .accordion summary .acc-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--solar);
+    letter-spacing: 0.1em;
+    width: 2.5rem;
+  }
+  .accordion summary .acc-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+    letter-spacing: -0.01em;
+  }
+  .accordion summary .acc-title em {
+    font-style: italic;
+    color: var(--solar);
+    font-variation-settings: "opsz" 24, "SOFT" 100, "WONK" 1;
+  }
+  .accordion summary .acc-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 0.25s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .accordion details[open] summary .acc-icon {
+    transform: rotate(45deg);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .accordion .acc-body {
+    padding: 0.5rem 0 2rem;
+    padding-left: 4rem;
+  }
+  @media (max-width: 768px) {
+    .accordion .acc-body { padding-left: 0; }
+  }
+
+  /* Architecture diagram inside accordion */
+  .arch-img {
+    width: 100%;
+    background: var(--paper-2);
+    border: 1px solid rgba(20, 19, 26, 0.12);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .arch-img img { width: 100%; height: auto; display: block; }
+  .arch-img .caption {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Pipeline steps (inside accordion) */
+  .steps .step {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(20, 19, 26, 0.12);
+  }
+  .steps .step:last-child { border-bottom: none; }
+  .steps .step .stage {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--solar);
+    font-weight: 500;
+    padding-top: 0.1rem;
+  }
+  .steps .step .body {
+    font-family: var(--sans);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .steps .step .body code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+  @media (max-width: 768px) {
+    .steps .step { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+
+  /* Stack chips */
+  .stack-block {
+    padding: 1.75rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .stack-block h5 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--solar-glow);
+    margin-bottom: 0.9rem;
+  }
+  .stack-block .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+  .stack-block .chips span {
+    border: 1px solid rgba(245, 241, 232, 0.22);
+    padding: 0.3rem 0.65rem;
+    color: var(--paper);
+  }
+
+  /* Engineering decisions */
+  .decisions .d {
+    margin-bottom: 1.4rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--solar);
+  }
+  .decisions .d:last-child { margin-bottom: 0; }
+  .decisions .d .title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+  }
+  .decisions .d .desc {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .decisions .d .desc code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--ink);
+    background: var(--paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 2px;
+  }
+
+  /* ───────────── OTHER PROJECTS ───────────── */
+  .other-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .other-card {
+    padding: 1.75rem;
+    background: var(--paper-2);
+    border: 1px solid rgba(20, 19, 26, 0.08);
+    transition: border-color 0.25s ease;
+  }
+  .other-card:hover { border-color: var(--solar); }
+  .other-card .tag {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--solar);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+  .other-card h4 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    line-height: 1.15;
+    margin-bottom: 0.9rem;
+    font-weight: 500;
+    font-variation-settings: "opsz" 36, "SOFT" 30;
+  }
+  .other-card p {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+  }
+  .other-card .stack-mini {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink);
+    border-top: 1px solid rgba(20, 19, 26, 0.1);
+    padding-top: 0.8rem;
+  }
+
+  /* ───────────── FOOTER ───────────── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  footer .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    position: relative;
+    z-index: 1;
+  }
+  footer h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    margin-bottom: 1.5rem;
+  }
+  footer h3 em {
+    font-style: italic;
+    color: var(--solar-glow);
+    font-variation-settings: "opsz" 96, "SOFT" 100, "WONK" 1;
+  }
+  footer .contacts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-content: end;
+  }
+  footer .contact-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.15);
+  }
+  footer .contact-line .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--solar-glow);
+  }
+  footer .contact-line a {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--paper);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer .contact-line a:hover { color: var(--solar-glow); }
+
+  footer .copyright {
+    max-width: 1280px;
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 241, 232, 0.1);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .copyright span:first-child { text-transform: uppercase; }
+
+  footer::after {
+    content: "";
+    position: absolute;
+    right: -150px; top: -150px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--solar) 0%, transparent 60%);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* Reveal — keep ONLY the subtle fade; remove all other motion */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ───────────── RESPONSIVE ───────────── */
+  @media (max-width: 768px) {
+    nav.top { padding: 0.9rem 1.25rem; }
+    nav.top ul { gap: 1rem; }
+    nav.top ul a { font-size: 0.66rem; }
+
+    .hero { padding: 6rem 1.25rem 2rem; min-height: auto; }
+    .hero .meta { gap: 1.5rem 2rem; }
+
+    .signals { padding: 0 1.25rem 2rem; }
+    .signals .strip {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      padding: 1.25rem;
+    }
+
+    section { padding: 3.5rem 1.25rem; }
+
+    .section-head { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 2.5rem; }
+
+    .crm-shots { grid-template-columns: 1fr; gap: 1rem; }
+
+    .ps-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .metrics { grid-template-columns: 1fr; }
+    .metrics .metric {
+      border-right: none;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.15);
+      padding: 1.25rem 0;
+    }
+    .metrics .metric:last-child { border-bottom: none; }
+
+    .compare .rows { grid-template-columns: 1fr; gap: 0.6rem; }
+    .compare .arrow { display: none; }
+    .compare .to-be {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(20, 19, 26, 0.1);
+    }
+
+    .accordion summary {
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+    }
+
+    .other-projects { grid-template-columns: 1fr; }
+
+    footer .inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── NAV ───────── -->
+<nav class="top" id="topnav">
+  <div class="brand">Naman Sanghavi<span class="dot">.</span></div>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#other">Other</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ───────── HERO ───────── -->
+<header class="hero">
+  <div class="eyebrow">
+    <span class="dot"></span>
+    Available · AI / ML Engineer · Mumbai → open to relocation
+  </div>
+  <h1>
+    Production AI,<br />
+    not just <em>notebooks.</em>
+  </h1>
+  <p class="lede">
+    AI/ML Engineer shipping production systems at <strong>Waaree Energies</strong> — lead propensity scoring live in Dynamics 365, hybrid RAG over scientific PDFs, and a full-stack patent intelligence pipeline. Comfortable end-to-end: data → model → API → CRM → production monitoring.
+  </p>
+  <div class="meta">
+    <div>
+      <span class="label">Education</span>
+      <span class="value">B.Tech AIML · NMIMS '26</span>
+    </div>
+    <div>
+      <span class="label">Currently</span>
+      <span class="value">Waaree Energies · Mumbai</span>
+    </div>
+    <div>
+      <span class="label">Reach</span>
+      <span class="value">
+        <a href="mailto:namansanghavi704@gmail.com">Email</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/naman-sanghavi-99010224b/" target="_blank" rel="noopener">LinkedIn</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/namansanghavi" target="_blank" rel="noopener">GitHub</a>
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── TL;DR SIGNAL STRIP ───────── -->
+<div class="signals">
+  <div class="strip">
+    <span class="label">/ At a glance</span>
+    <div class="items">
+      <span><b>3</b> production AI systems shipped</span>
+      <span class="dot">/</span>
+      <span><b>32,701</b>-lead XGBoost · <b>0.808</b> ROC-AUC · <b>47.9%</b> top-decile</span>
+      <span class="dot">/</span>
+      <span><b>4-stage</b> hybrid RAG · vector + BM25 + RRF + cross-encoder</span>
+      <span class="dot">/</span>
+      <span>Live in <b>Dynamics 365</b> · Azure · Docker · FastAPI</span>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── FEATURED WORK ───────── -->
+<section id="work">
+  <div class="section-head reveal">
+    <span class="num">/ 01</span>
+    <h2>Selected <em>work.</em></h2>
+  </div>
+
+  <!-- ─── PROJECT 1 — LEAD PROPENSITY ─── -->
+  <article class="project reveal" id="propensity">
+    <div class="project-head">
+      <span class="tag">Project 01 · Production · Live in CRM</span>
+      <h3>AI Lead Propensity <em>Scoring.</em></h3>
+      <p class="tagline">Production lead-scoring system live inside Microsoft Dynamics 365 CRM — reps work an AI-ranked queue instead of arrival order.</p>
+    </div>
+
+    <!-- Default open: in-CRM screenshots -->
+    <div class="crm-shots">
+      <div class="shot">
+        <img src="images/propensity-crm.png" alt="All Leads view in Dynamics 365 with AI Tier (Hot/Warm/Cold) and Win Confidence scores visible. Customer names, owners, and contact fields redacted." />
+        <span class="caption">▶ Ranked queue inside Dynamics 365 · names redacted</span>
+      </div>
+      <div class="shot">
+        <img src="images/propensity-scoring-panel.png" alt="AI Scoring panel on a lead record — AI Tier: Hot, Win % Confidence: 98, Win Probability: 0.9784" />
+        <span class="caption">▶ AI Scoring panel</span>
+      </div>
+    </div>
+
+    <div class="ps-grid">
+      <span class="label">Problem</span>
+      <p class="text">Waaree receives ~7,000 leads/month with under 10% converting. Reps had no way to know which to call first.</p>
+      <span class="label">Solution</span>
+      <p class="text"><strong>An AI system that scores every new lead 0–100 within minutes and tags it Hot / Warm / Cold directly inside the CRM</strong> — reps now work an AI-ranked queue instead of arrival order.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="big"><em>0.808</em></div>
+        <div class="label">ROC-AUC · 10,310 hold-out leads</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>47.9%</em></div>
+        <div class="label">Top-decile capture of all wins</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>~2–5×</em></div>
+        <div class="label">Lift vs. random calling</div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <h4>AS-IS  →  TO-BE</h4>
+      <div class="rows">
+        <div class="header-row">Before</div>
+        <div class="header-row arrow"></div>
+        <div class="header-row">After</div>
+
+        <div class="as-is">No prioritisation — reps dial in arrival order</div>
+        <div class="arrow">→</div>
+        <div class="to-be">AI-ranked queue, Hot-tier leads first</div>
+
+        <div class="as-is">~10% conversion across the funnel</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Target 15–20% on AI-prioritised pipeline</div>
+
+        <div class="as-is">Scattered effort across all leads</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Focused on high-value, high-probability wins</div>
+
+        <div class="as-is">Delayed response to incoming leads</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Immediate response on Hot leads, in minutes</div>
+      </div>
+    </div>
+
+    <!-- Collapsed by default -->
+    <div class="accordion">
+      <details>
+        <summary>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Architecture &amp; <em>pipeline.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="arch-img">
+            <img src="images/propensity-arch.png" alt="End-to-end pipeline: Windows Task Scheduler → Authenticate (Azure AD) → Fetch Leads from Dynamics 365 → Filter (closed/scored) → Preprocessing &amp; Feature Engineering → sklearn ColumnTransformer → XGBoost Classifier → Tiering (Hot/Warm/Cold) → Business Rules Overrides → Write Back to Dynamics 365" />
+            <div class="caption">End-to-end pipeline · runs unattended every 30 minutes</div>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="stage">Fetch</span>
+              <p class="body">OAuth2 against Azure AD → OData v4 calls to Dataverse. <strong>Incremental sync</strong> — only fetches leads created or modified since the last successful run; state persisted in <code>last_run_timestamp.txt</code>.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Filter</span>
+              <p class="body">Drops closed leads (Won / Lost / Junk) and leads already scored — strict <strong>score-once policy</strong>.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Preprocess</span>
+              <p class="body">Case-fold + rare-category collapse (<code>n &lt; 30 → "Other"</code>); temporal features from timestamps; description-text mining for size (kW), timeline, and sentiment; missingness flags as features; <code>log1p</code> + 99th-percentile clip on numerics; PIN-prefix geographic features.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Encode</span>
+              <p class="body"><code>sklearn ColumnTransformer</code> — <code>OrdinalEncoder</code> for low-cardinality, smoothed <code>TargetEncoder</code> for high-cardinality, passthrough for numerics. <strong>32 transformed features</strong>.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Score</span>
+              <p class="body">XGBoost classifier (<code>n_estimators=500, max_depth=6</code>) → probability → 0–100 score.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Tier &amp; rules</span>
+              <p class="body">Hot (≥70) / Warm (≥40) / Cold (&lt;40). Then business rules: <strong>Order size ≥ 50 kW → force Hot</strong> (with recorded reason).</p>
+            </div>
+            <div class="step">
+              <span class="stage">Write back</span>
+              <p class="body"><code>PATCH</code> the lead in Dataverse with <code>ispl_aiscore</code>, <code>ispl_aitier</code>, probability, scored timestamp, and rule-trigger reason — so reps see <em>why</em> a lead is Hot.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Operate</span>
+              <p class="body">Windows Task Scheduler triggers <code>run_sync.bat</code> every 30 min. Safety rails: <code>MAX_LEADS_PER_RUN = 5000</code>, score-once, daily rotating logs.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Model &amp; <em>features.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="steps">
+            <div class="step">
+              <span class="stage">Training</span>
+              <p class="body"><strong>32,701 leads</strong> from Jun 2025 – Jan 2026 (17.3% win rate). Out-of-time tested on <strong>10,310 leads</strong> from Feb–Apr 2026 (16.95% win rate). <em>Out-of-time validation, not random split</em> — mirrors how the model is actually used.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Performance</span>
+              <p class="body">ROC-AUC <strong>0.808</strong> · PR-AUC <strong>0.6745</strong> · Top-decile capture <strong>47.9%</strong> — the top-scored 10% of leads contain almost half of all eventual wins.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Features (32)</span>
+              <p class="body"><strong>9 low-card categoricals</strong> (Lead Source, Product Category, Industry, Zone, etc.) → OrdinalEncoder. <strong>3 high-card categoricals</strong> (Campaign Name, State, PIN prefix) → smoothed TargetEncoder. <strong>11 numeric</strong> (<code>log1p(Order Size)</code>, temporal, description metrics). <strong>9 binary</strong> (keyword + missingness flags).</p>
+            </div>
+            <div class="step">
+              <span class="stage">Interpretability</span>
+              <p class="body">SHAP wired in for training-time explainability; rule-trigger reason field surfaces the "why" inside the CRM.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Tech <em>stack.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="stack-block">
+            <h5>Stack</h5>
+            <div class="chips">
+              <span>Python</span><span>XGBoost 2.1</span><span>scikit-learn 1.5</span><span>SHAP</span><span>pandas 2.2</span><span>numpy 2.0</span>
+              <span>joblib</span><span>Microsoft Dynamics 365</span><span>Dataverse</span><span>OData v4</span>
+              <span>OAuth2 / Azure AD</span><span>Windows Task Scheduler</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">04</span>
+          <span class="acc-title">Key engineering <em>decisions.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="decisions">
+            <div class="d">
+              <div class="title">Batch sync into CRM, not a separate dashboard.</div>
+              <div class="desc">Sales reps live in Dynamics — pushing scores into their existing tool drove adoption far better than building a parallel UI.</div>
+            </div>
+            <div class="d">
+              <div class="title">Business rules as a layer on top of ML.</div>
+              <div class="desc">Pure model scores under-call rare large orders. The 50 kW override captures domain knowledge the model can't learn statistically from few examples.</div>
+            </div>
+            <div class="d">
+              <div class="title">Score-once policy.</div>
+              <div class="desc">Locks in the score at lead intake instead of re-scoring on every edit — prevents noise from reps updating descriptions.</div>
+            </div>
+            <div class="d">
+              <div class="title">Rule-trigger reason field.</div>
+              <div class="desc">Telling reps <em>why</em> a lead is Hot ("order size 80 kW") turned a black-box score into something they trust and act on.</div>
+            </div>
+            <div class="d">
+              <div class="title">Disabled the timeline rule after testing.</div>
+              <div class="desc">EDA showed templated "how soon" answers correlated with cold leads, not hot. Built the rule, validated it, disabled it — instead of trusting intuition.</div>
+            </div>
+            <div class="d">
+              <div class="title">Out-of-time validation, not random split.</div>
+              <div class="desc">Tested on Feb–Apr 2026 data after training on Jun 2025 – Jan 2026 — mirrors how the model is actually used in production.</div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── PROJECT 2 — RESEARCH RAG ─── -->
+  <article class="project reveal" id="rag">
+    <div class="project-head">
+      <span class="tag">Project 02 · Live Beta · On-prem RAG</span>
+      <h3>Research Paper <em>Intelligence.</em></h3>
+      <p class="tagline">GROBID-powered RAG over scientific PDFs — hybrid retrieval with citation-grounded answers, on-prem.</p>
+    </div>
+
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/17vNdFql9SBrkBnJsuSe6V6drZEJTwRCT/preview" allow="autoplay" allowfullscreen></iframe>
+      <span class="caption">▶ 2-min demo</span>
+    </div>
+
+    <div class="ps-grid">
+      <span class="label">Problem</span>
+      <p class="text">Waaree's R&amp;D team reads 30–40 papers/week. Generic PDF chatbots lose section structure, miss exact technical terms ("ORR", "Pt/C 20%"), and free LLMs lose context after ~20 pages.</p>
+      <span class="label">Solution</span>
+      <p class="text"><strong>An on-prem RAG system that parses scientific PDFs with GROBID, retrieves with a 4-stage hybrid pipeline (vector + BM25 + RRF + cross-encoder rerank), and returns citation-grounded answers</strong> across Q&amp;A, comparison, and summarisation tasks.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="big"><em>~1 hr → sec</em></div>
+        <div class="label">Time to answer per paper</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>4-stage</em></div>
+        <div class="label">Hybrid retrieval pipeline</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>3 modes</em></div>
+        <div class="label">Q&amp;A · Compare · Summarise</div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <h4>AS-IS  →  TO-BE</h4>
+      <div class="rows">
+        <div class="header-row">Before</div>
+        <div class="header-row arrow"></div>
+        <div class="header-row">After</div>
+
+        <div class="as-is">~1 hour per paper to read &amp; note</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Indexed once, ask anytime in seconds</div>
+
+        <div class="as-is">Free LLMs lose context after 20 pages</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Section-aware chunking, no context loss</div>
+
+        <div class="as-is">Can't compare 2 papers section-by-section</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Cross-paper Q&amp;A with cited evidence</div>
+
+        <div class="as-is">Generic parsers lose tables, citations, figures</div>
+        <div class="arrow">→</div>
+        <div class="to-be">GROBID preserves structure + extracts citations</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <details>
+        <summary>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Architecture &amp; <em>retrieval pipeline.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="arch-img">
+            <img src="images/rag-arch.png" alt="Ingest path: Drop PDF in input/ → GROBID Parsing → Custom Parser → Token-aware Chunker → Embedder (BGE-large) → Qdrant Cloud (Shared Store). Query path: React Frontend → Task Router (Q&amp;A · Compare · Summary) → Hybrid Retrieval 4 stages (Vector top 20 + BM25 top 20 → RRF Fusion → Cross-encoder Rerank) → LLM Orchestrator → Response with Citations." />
+            <div class="caption">Two paths through one shared Qdrant store · ingest + query</div>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="stage">Ingest</span>
+              <p class="body">Drop a PDF in <code>input/</code> or POST to FastAPI → GROBID parses to TEI XML → custom parser cleans, forward-fills section context, marks terminal sections (References, Acks) → tiktoken chunker (<code>cl100k_base</code>, 800-token chunks, section-respecting) → BGE-large embeddings → Qdrant Cloud.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Retrieve</span>
+              <p class="body"><strong>4-stage hybrid</strong> — vector search (top 20) + BM25 keyword search (top 20) → Reciprocal Rank Fusion (scale-invariant) → cross-encoder rerank (<code>ms-marco-MiniLM-L-6-v2</code>) → top 5 to LLM. Terminal chunks always filtered.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Generate</span>
+              <p class="body"><strong>3 task modes</strong>: Q&amp;A (within one paper), Compare (across N papers in parallel), Summarise (section-by-section or whole). Gemini 2.5 Flash default · Flash Lite for simple queries · Mistral 7B (HF) fallback · multi-key rotation.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Operate</span>
+              <p class="body"><code>watchdog</code> auto-ingests <code>input/</code>. FastAPI exposes <code>/ingest</code>, <code>/qa</code>, <code>/compare</code>, <code>/summarize</code>. 24h query cache; per-call usage log to <code>llm_usage.jsonl</code>. Streamlit primary UI; Waaree-branded React SPA in development.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Tech <em>stack.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="stack-block">
+            <h5>Stack</h5>
+            <div class="chips">
+              <span>Python</span><span>FastAPI</span><span>GROBID (Docker)</span><span>Qdrant Cloud</span>
+              <span>BAAI/bge-large-en-v1.5</span><span>rank_bm25 + RRF</span><span>ms-marco-MiniLM cross-encoder</span>
+              <span>Gemini 2.5 Flash / Flash Lite</span><span>Mistral 7B (HF)</span><span>tiktoken</span>
+              <span>watchdog</span><span>Streamlit + React</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Key engineering <em>decisions.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="decisions">
+            <div class="d">
+              <div class="title">GROBID as a service, not a library.</div>
+              <div class="desc">Wrapping a mature Java parser in Python would re-implement years of work badly. Running it as a Docker service keeps the pipeline lightweight and lets GROBID upgrade independently.</div>
+            </div>
+            <div class="d">
+              <div class="title">Hybrid retrieval — all four stages earn their place.</div>
+              <div class="desc">Vector alone misses exact terms ("ORR", "Pt/C 20%"); BM25 alone misses paraphrases; RRF merges them without normalising scores; cross-encoder rerank gives final precision on the top 10.</div>
+            </div>
+            <div class="d">
+              <div class="title">RRF instead of weighted score fusion.</div>
+              <div class="desc">Score normalisation between vector cosine and BM25 is a footgun. RRF only uses <em>ranks</em>, so it's scale-invariant and parameter-free.</div>
+            </div>
+            <div class="d">
+              <div class="title">Two Qdrant collections.</div>
+              <div class="desc"><code>chunks</code> for retrieval, <code>doc_records</code> for paper-level operations (listing, similar-paper lookup). Payload indexes on <code>doc_id / main_section / is_terminal</code> turn filtered queries from full-scans into O(log n).</div>
+            </div>
+            <div class="d">
+              <div class="title">Multi-key Gemini rotation + Mistral fallback.</div>
+              <div class="desc">Free-tier rate limits would otherwise kill the system during heavy ingestion. Rotation + fallback + 24h cache keeps it usable end-to-end.</div>
+            </div>
+            <div class="d">
+              <div class="title">Terminal-section filtering at parse time.</div>
+              <div class="desc">References / Acknowledgements chunks are marked at parse time and excluded from retrieval — so the LLM can never accidentally cite a bibliography line as evidence.</div>
+            </div>
+            <div class="d">
+              <div class="title">Token-aware chunking with tiktoken.</div>
+              <div class="desc">Exact <code>cl100k_base</code> token counts prevent silent overflows into Gemini; chunks respect section boundaries so context never bleeds across topics.</div>
+            </div>
+            <div class="d">
+              <div class="title">Per-call usage log (<code>llm_usage.jsonl</code>).</div>
+              <div class="desc">Timestamp, model, key label, tokens, success/failure — you can't optimise what you can't see. Makes cost and key health visible.</div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </article>
+
+  <!-- ─── PROJECT 3 — PATENT PIPELINE ─── -->
+  <article class="project reveal" id="patent">
+    <div class="project-head">
+      <span class="tag">Project 03 · Phase 1 Live · Full-stack</span>
+      <h3>Patent Intelligence <em>Pipeline.</em></h3>
+      <p class="tagline">Full-stack patent intelligence — scrape, extract, annotate, and answer questions on any Google Patents URL.</p>
+    </div>
+
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/14V7Qojdf8lCIuvX46zxXKyVuPS9YUH-l/preview" allow="autoplay" allowfullscreen></iframe>
+      <span class="caption">▶ 2-min demo</span>
+    </div>
+
+    <div class="ps-grid">
+      <span class="label">Problem</span>
+      <p class="text">Waaree's R&amp;D engineers spend hours manually reading patents — mapping reference numerals to component names, then translating preferred-embodiment text into lab-reproduction steps. Commercial platforms like PatSnap and Cipher are expensive and still don't expose lab-reproduction guidance.</p>
+      <span class="label">Solution</span>
+      <p class="text"><strong>A full-stack web app that takes a Google Patents URL, scrapes the patent end-to-end, annotates figures with component labels, and answers 5 standard R&amp;D questions</strong> — including step-by-step lab reproduction — in a single page.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="big"><em>Hrs → mins</em></div>
+        <div class="label">Engineer review time per patent</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>100%</em></div>
+        <div class="label">Figure coverage via 2-tier scraping</div>
+      </div>
+      <div class="metric">
+        <div class="big"><em>5 Q&amp;A</em></div>
+        <div class="label">Standard questions per patent</div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <h4>AS-IS  →  TO-BE</h4>
+      <div class="rows">
+        <div class="header-row">Before</div>
+        <div class="header-row arrow"></div>
+        <div class="header-row">After</div>
+
+        <div class="as-is">Engineers manually read &amp; explain each patent</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Bot extracts; engineer just reviews the output</div>
+
+        <div class="as-is">Figure refs hard to follow ("Fig 2 callout 14…")</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Figures annotated with component-name overlays</div>
+
+        <div class="as-is">Existing tools fail on complex patent PDFs</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Two-tier scraping handles structure, text &amp; figures</div>
+
+        <div class="as-is">Commercial platforms (PatSnap, Cipher) are costly</div>
+        <div class="arrow">→</div>
+        <div class="to-be">Open stack with LLM-driven Q&amp;A out of the box</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <details>
+        <summary>
+          <span class="acc-num">01</span>
+          <span class="acc-title">Architecture &amp; <em>pipeline.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="arch-img">
+            <img src="images/patent-arch.png" alt="User Input → REST API Dispatch → Scraping (parallel sub-tasks: Metadata + Text, Figure Scraping Tier 1, Figure Scraping Tier 2) → Text Cleaning → Structured Storage → Component Extraction → Figure Annotation → Output. Q&amp;A pipeline (5 questions): Branch A Instant Lookup, Branch B LLM-generated, Hybrid Router." />
+            <div class="caption">Parallel scraping · hybrid Q&amp;A router (instant lookup vs LLM)</div>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="stage">Scrape</span>
+              <p class="body">Selenium pulls high-resolution figure URLs (the <code>D000xx</code> hi-res URLs only load after Google Patents' JavaScript runs) → PyMuPDF renders the PDF at 300 DPI as fallback → BeautifulSoup extracts metadata, abstract, description, claims. <strong>Two-tier scraping guarantees 100% figure coverage.</strong></p>
+            </div>
+            <div class="step">
+              <span class="stage">Clean &amp; store</span>
+              <p class="body"><code>text_cleaner.py</code> normalises encoding artefacts and whitespace; <code>storage.py</code> writes a structured folder per patent (<code>metadata.json</code>, <code>abstract.txt</code>, <code>description.txt</code>, <code>claims.txt</code>, <code>figures/</code>). <strong>No database</strong> — zip the directory and the entire corpus moves.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Extract</span>
+              <p class="body">Regex finds reference-number candidates in the Preferred Embodiment section → NLTK POS tagging filters out non-nouns and generic terms ("layer", "film", "substrate") → produces <code>ref_number → component_name</code> mapping. Low-confidence picks flagged with <code>(?)</code>.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Annotate</span>
+              <p class="body">Tesseract OCR locates reference numbers on each figure → Pillow draws component-name labels (semi-transparent white background, navy text) → saves annotated PNG alongside the original.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Answer</span>
+              <p class="body"><strong>5-question Q&amp;A with a hybrid router</strong>. Q1/Q3/Q4 (owner / dates / jurisdiction) answered instantly from metadata. Q2 (invention summary) and Q5 (step-by-step lab reproduction) generated by Gemini 2.5 — LLM used <em>only where language quality matters</em>.</p>
+            </div>
+            <div class="step">
+              <span class="stage">Operate</span>
+              <p class="body">Flask + Waitress (8 threads). Background scraping with <code>threading.Lock</code> prevents duplicate scrapes. Frontend polls <code>/api/status</code>. Every pipeline stage exposed as a REST endpoint so engineers can re-run a single stage without re-scraping.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">02</span>
+          <span class="acc-title">Tech <em>stack.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="stack-block">
+            <h5>Stack</h5>
+            <div class="chips">
+              <span>Python</span><span>Flask</span><span>Waitress (WSGI)</span><span>Selenium + webdriver-manager</span>
+              <span>BeautifulSoup</span><span>PyMuPDF (fitz)</span><span>NLTK (POS tagging)</span>
+              <span>pytesseract + Tesseract</span><span>Pillow</span><span>Google Gemini 2.5</span>
+              <span>Mistral 7B (HF) fallback</span><span>Vanilla JS / CSS Grid</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="acc-num">03</span>
+          <span class="acc-title">Key engineering <em>decisions.</em></span>
+          <span class="acc-icon">+</span>
+        </summary>
+        <div class="acc-body">
+          <div class="decisions">
+            <div class="d">
+              <div class="title">Two-tier figure scraping.</div>
+              <div class="desc">Selenium first — the hi-res <code>D000xx</code> URLs only load after Google Patents' JavaScript runs. PyMuPDF rendering at 300 DPI as a fallback guarantees 100% figure coverage even when scraping fails.</div>
+            </div>
+            <div class="d">
+              <div class="title">Hybrid Q&amp;A router — LLM only where it earns its place.</div>
+              <div class="desc">Q1/Q3/Q4 are pure metadata lookups; spending a Gemini call on them would waste tokens and add latency. Q2 (summary) and Q5 (reproduction guide) are where language quality matters, so they go to Gemini.</div>
+            </div>
+            <div class="d">
+              <div class="title">NLTK POS filtering for component names.</div>
+              <div class="desc">Raw regex matches on reference numbers pick up generic words ("layer", "film", "substrate"). POS tagging filters down to genuine noun phrases; low-confidence picks are flagged with (?) so engineers can verify rather than trust blindly.</div>
+            </div>
+            <div class="d">
+              <div class="title">Filesystem-per-patent, no database.</div>
+              <div class="desc">Each patent gets its own folder with metadata.json, abstract.txt, description.txt, claims.txt, and figures/. Portable — zip the directory and the entire patent corpus moves with it. No schema migrations, no DB to host.</div>
+            </div>
+            <div class="d">
+              <div class="title">Every stage is independently callable.</div>
+              <div class="desc">Component extraction and figure annotation each have their own REST endpoint, so engineers can re-run a single stage without re-scraping. Helpful when tuning the OCR / NLTK steps on already-scraped patents.</div>
+            </div>
+            <div class="d">
+              <div class="title">Async background scraping with in-memory job locks.</div>
+              <div class="desc">Scraping is slow (Selenium + figure downloads). Kicked off as a background thread; frontend polls <code>/api/status</code>. A <code>threading.Lock</code> prevents the same patent from being scraped twice concurrently.</div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </article>
+</section>
+
+<!-- ───────── OTHER PROJECTS ───────── -->
+<section id="other">
+  <div class="section-head reveal">
+    <span class="num">/ 02</span>
+    <h2>Other <em>builds.</em></h2>
+  </div>
+
+  <div class="other-projects">
+    <article class="other-card reveal">
+      <div class="tag">Computer Vision · Academic</div>
+      <h4>Hybrid Defect Detection for Manufacturing QA.</h4>
+      <p>Hybrid framework combining supervised deep learning with unsupervised anomaly detection — catches both known and unknown defects in manufacturing imagery. Designed for real-time quality inspection; ready for manufacturing-unit deployment.</p>
+      <div class="stack-mini">Deep Learning · Anomaly Detection · OpenCV</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">GenAI · Academic</div>
+      <h4>RAG QA system for YouTube videos &amp; PDFs.</h4>
+      <p>Earlier RAG chatbot enabling natural-language queries over video + PDF content. Whisper for transcription, vector DB for retrieval, Streamlit frontend, LLM-powered context-aware responses.</p>
+      <div class="stack-mini">Whisper · Vector DB · LLMs · Streamlit</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">Data Science · Academic</div>
+      <h4>Energy Demand Forecasting — Hierarchical Time Series.</h4>
+      <p>Hierarchical forecasts for India's state-wise electricity demand using Prophet. Modelled trend and seasonality patterns; EDA on regional consumption patterns to uncover demand-side insights.</p>
+      <div class="stack-mini">Prophet · pandas · time series</div>
+    </article>
+
+    <article class="other-card reveal">
+      <div class="tag">Deep Learning · Academic</div>
+      <h4>Image Caption Generator — Encoder-Decoder.</h4>
+      <p>CNN (VGG) feature extractor with LSTM decoder for image-to-text generation. Data preprocessing and feature engineering to improve BLEU on a standard captioning benchmark.</p>
+      <div class="stack-mini">CNN (VGG) · LSTM · Keras</div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────── FOOTER / CONTACT ───────── -->
+<footer id="contact">
+  <div class="inner">
+    <div>
+      <h3>Let's build <em>something.</em></h3>
+      <p style="font-family: var(--serif); font-weight: 300; font-size: 1.1rem; line-height: 1.6; max-width: 28rem; color: var(--paper); opacity: 0.85; font-variation-settings: 'opsz' 24, 'SOFT' 50;">
+        Open to AI/ML Engineer roles in Mumbai and Bangalore — especially product companies and AI-first startups. Always up for a chat about RAG, propensity models, or anything production AI.
+      </p>
+    </div>
+    <div class="contacts">
+      <div class="contact-line">
+        <span class="label">Email</span>
+        <a href="mailto:namansanghavi704@gmail.com">namansanghavi704@gmail.com</a>
+      </div>
+      <div class="contact-line">
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/naman-sanghavi-99010224b/" target="_blank" rel="noopener">/in/naman-sanghavi</a>
+      </div>
+      <div class="contact-line">
+        <span class="label">GitHub</span>
+        <a href="https://github.com/namansanghavi" target="_blank" rel="noopener">@namansanghavi</a>
+      </div>
+      <div class="contact-line">
+        <span class="label">Phone</span>
+        <a href="tel:+919265621688">+91 92656 21688</a>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <span>© 2026 Naman Sanghavi · Mumbai</span>
+    <span style="opacity: 0.6;">Built with care · No frameworks · ~35 KB</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: "-30px 0px" });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  const nav = document.getElementById("topnav");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) nav.classList.add("scrolled");
+    else nav.classList.remove("scrolled");
+  });
+</script>
+
+</body>
+</html>
